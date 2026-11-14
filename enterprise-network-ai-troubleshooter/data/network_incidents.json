@@ -1,0 +1,82 @@
+[
+    {
+        "id": "BGP-001",
+        "domain": "BGP",
+        "device": "router-01",
+        "logs": "\n        BGP: Neighbor 10.0.0.2 state changed\n        Established -> Idle\n        BGP: Connection reset by peer\n        BGP: Retrying connection\n        ",
+        "expected_diagnosis": "BGP neighbor session failure",
+        "expected_evidence": [
+            "Neighbor transitioned from Established to Idle",
+            "Connection reset by peer"
+        ],
+        "possible_causes": [
+            "Remote peer restart",
+            "TCP connectivity issue",
+            "Firewall or ACL interference"
+        ]
+    },
+    {
+        "id": "OSPF-001",
+        "domain": "OSPF",
+        "device": "router-02",
+        "logs": "\n        OSPF: Neighbor 192.168.1.2 changed state FULL -> DOWN\n        OSPF: Dead timer expired\n        OSPF: Adjacency lost\n        ",
+        "expected_diagnosis": "OSPF neighbor adjacency failure",
+        "expected_evidence": [
+            "Neighbor transitioned from FULL to DOWN",
+            "Dead timer expired"
+        ],
+        "possible_causes": [
+            "Hello packets not received",
+            "Network connectivity interruption",
+            "Interface or configuration problem"
+        ]
+    },
+    {
+        "id": "INT-001",
+        "domain": "INTERFACE",
+        "device": "router-03",
+        "logs": "\n        Interface Ethernet1/1 changed state to DOWN\n        Physical link failure detected\n        Interface protocol state DOWN\n        ",
+        "expected_diagnosis": "Network interface link failure",
+        "expected_evidence": [
+            "Interface state changed to DOWN",
+            "Physical link failure detected"
+        ],
+        "possible_causes": [
+            "Cable or optical transceiver issue",
+            "Remote interface down",
+            "Hardware failure"
+        ]
+    },
+    {
+        "id": "DHCP-001",
+        "domain": "DHCP",
+        "device": "router-04",
+        "logs": "\n        DHCP: No available address in pool VLAN100\n        DHCP: Address allocation request failed\n        DHCP: Pool utilization 100 percent\n        ",
+        "expected_diagnosis": "DHCP address pool exhaustion",
+        "expected_evidence": [
+            "No available address in pool",
+            "Pool utilization reached 100 percent"
+        ],
+        "possible_causes": [
+            "Insufficient address pool capacity",
+            "Leases not being released",
+            "Unexpected increase in DHCP clients"
+        ]
+    },
+    {
+        "id": "TLS-001",
+        "domain": "TLS",
+        "device": "router-05",
+        "logs": "\n        TLS: Handshake failed\n        TLS: Certificate verification error\n        TLS: Peer certificate has expired\n        ",
+        "expected_diagnosis": "TLS certificate expiration",
+        "expected_evidence": [
+            "Certificate verification error",
+            "Peer certificate has expired"
+        ],
+        "possible_causes": [
+            "Expired peer certificate",
+            "Incorrect certificate deployment",
+            "Certificate renewal failure"
+        ]
+    }
+]
